@@ -1,32 +1,10 @@
-const mysql = require('mysql');
+const express = require('express');
+const app = express();
 
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root@123',
-  database: 'siri_ecommerce_2',
-});
+app.get('/', (req, resp) => {
+  resp.send("route working...");
+})
 
-// con.connect((err)=>{
-//   if(err)
-//   {
-//     console.warn("not connect ", err)
-//   }else{
-//     console.warn("connected!!!")
-//   }
-// })
+app.listen(5000);
 
-con.query('SELECT * FROM products', (err, result) => {
-  if (err) {
-    console.warn('some error ');
-  } else {
-    console.warn(result);
-  }
-});
-
-console.log('hi');
-
-/* 
-
-
-*/
+console.log('hi !')
