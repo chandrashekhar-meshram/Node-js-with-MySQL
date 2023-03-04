@@ -1,19 +1,22 @@
 const express = require("express");
-const connection = require("./config");
+const con = require("./config");
 const app = express();
 
+//required to pass data from body
+app.use(express.json());
+
 app.get("/", (req, resp) => {
-  connection.query("select * from products", (err, result) => {
+  con.query("select * from products", (err, result) => {
     if (err) {
       resp.send("error in api");
     } else {
       resp.send(result);
     }
-  });
+  }); 
 });
 
 app.post('/', (req, resp) => {
-  const data = {id: "6", title: "shirt 5", price: "3000", description: "shirt", category: "clothing", image: "test image"};
+  const data = req.body;
 
   con.query('INSERT INTO products SET ?', data, (err, result, fields) => {
     if(err) throw err;
