@@ -25,7 +25,12 @@ app.post('/', (req, resp) => {
 });
 
 app.put('/', (req, resp) => {
-  resp.send("update api is working...");
+   const data = ['8', 'shirt 8', '8000', 'shirt', 'clothing', 'test image 8', 8];
+
+ con.query("UPDATE products SET id = ?, title = ?, price = ?, description = ?, category = ?, image = ? where id = ?", data, (err, result, fields) => {
+  if(err) throw err;
+  resp.send(result);
+ })
 })
 
 console.log("hi");
