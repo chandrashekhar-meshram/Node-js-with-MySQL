@@ -12,25 +12,25 @@ app.get("/", (req, resp) => {
     } else {
       resp.send(result);
     }
-  }); 
+  });
 });
 
 app.post('/', (req, resp) => {
   const data = req.body;
 
   con.query('INSERT INTO products SET ?', data, (err, result, fields) => {
-    if(err) throw err;
+    if (err) throw err;
     resp.send(result);
   })
 });
 
-app.put('/', (req, resp) => {
-   const data = ['8', 'shirt 8', '8000', 'shirt', 'clothing', 'test image 8', 8];
+app.put('/:id', (req, resp) => {
+  const data = [req.body.id, req.body.title, req.body.price, req.body.description, req.body.category, req.body.image, req.params.id];
 
- con.query("UPDATE products SET id = ?, title = ?, price = ?, description = ?, category = ?, image = ? where id = ?", data, (err, result, fields) => {
-  if(err) throw err;
-  resp.send(result);
- })
+  con.query("UPDATE products SET id = ?, title = ?, price = ?, description = ?, category = ?, image = ? where id = ?", data, (err, result, fields) => {
+    if (err) throw err;
+    resp.send(result);
+  })
 })
 
 console.log("hi");
