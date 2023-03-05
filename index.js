@@ -24,6 +24,10 @@ app.post('/', (req, resp) => {
   })
 });
 
+app.put('/', (req, resp) => {
+  resp.send("update api is working...");
+})
+
 console.log("hi");
 
 app.listen("5000");
